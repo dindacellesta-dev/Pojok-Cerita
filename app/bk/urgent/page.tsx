@@ -1,12 +1,21 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { db } from "@/lib/firebase";
 import { collection, query, where, orderBy, onSnapshot } from "firebase/firestore";
 import { useRouter } from "next/navigation";
 
-export default function UrgentPage() {
-  const [urgentList, setUrgentList] = useState([]);
+// Tipe data cerita urgent
+type CeritaUrgent = {
+  id: string;
+  judul?: string;
+  isi?: string;
+  flaggedWords?: string[];
+  isUrgent?: boolean;
+};
+
+export default function UrgentPage(): JSX.Element {
+  const [urgentList, setUrgentList] = useState<CeritaUrgent[]>([]);
   const router = useRouter();
 
   useEffect(() => {
@@ -20,7 +29,8 @@ export default function UrgentPage() {
       const data = snap.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
-      }));
+      })) as CeritaUrgent[];
+
       setUrgentList(data);
     });
 
@@ -29,7 +39,6 @@ export default function UrgentPage() {
 
   return (
     <div className="min-h-screen bg-[#F1F5FF] px-6 py-10">
-
       {/* Tombol Kembali */}
       <button
         onClick={() => router.push("/bk/dashboard")}
@@ -54,13 +63,13 @@ export default function UrgentPage() {
           >
             <h2 className="text-lg font-semibold text-gray-900">{c.judul}</h2>
 
-            <p className="text-gray-700 mt-2 whitespace-pre-line">
-              {c.isi}
-            </p>
+            <p className="text-gray-700 mt-2 whitespace-pre-line">{c.isi}</p>
 
-            <p className="mt-3 text-sm text-red-600">
-              ⚠ Kata terdeteksi: {c.flaggedWords.join(", ")}
-            </p>
+            {c.flaggedWords && c.flaggedWords.length > 0 && (
+              <p className="mt-3 text-sm text-red-600">
+                ⚠ Kata terdeteksi: {c.flaggedWords.join(", ")}
+              </p>
+            )}
           </div>
         ))}
       </div>
