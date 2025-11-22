@@ -94,10 +94,12 @@ export default function PercayaDiriPage() {
             target="_blank"
             className="block"
           >
-            <img
-              src="https://img.youtube.com/vi/4Op3RS3cobo/maxresdefault.jpg"
-              className="rounded-xl shadow-md hover:opacity-90 transition"
-            />
+           <img
+  src="https://img.youtube.com/vi/4Op3RS3cobo/maxresdefault.jpg"
+  alt="Thumbnail video YouTube"
+  className="rounded-xl shadow-md hover:opacity-90 transition"
+/>
+
           </a>
         </div>
       ),

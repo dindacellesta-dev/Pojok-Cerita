@@ -59,7 +59,7 @@ export default function Beranda() {
 
       {/* Quote */}
       <div className="text-center text-gray-700 italic mb-6">
-        "Ceritakan lelahmu hari ini, dan kembalilah dengan cerita yang lebih bahagia"
+        Ceritakan lelahmu hari ini, dan kembalilah dengan cerita yang lebih bahagia
       </div>
 
       {/* Info Developer */}
